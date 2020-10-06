@@ -12,7 +12,7 @@ def recbinsearch(L, l, u, target):
     if l > u:
         return -1
 
-    lst_loc = int((l + u) / 2)
+    lst_loc = l + u // 2
     if target == L[lst_loc]:
         return lst_loc
 

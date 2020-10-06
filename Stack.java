@@ -52,18 +52,16 @@ class MyQueue <T> {
 	 */
 	T Pop() throws Exception {
 		int pre;// if queue is empty, throw the following message
-		if(isEmpty())
+		if(IsEmpty())
 			throw new Exception("Queue is empty. Cannot delete.");
 		else {
-			pre = front
+			pre = front;
 			front = (front + 1) % capacity;
 			return queue[pre];
 		}
 	}
 
 // NEED TO IMPLEMENT
-
-	}
 	
 	public String toString() {
 		String a = new String();
@@ -71,12 +69,18 @@ class MyQueue <T> {
 		a = "MyQueue : ";
 
 // NEED TO IMPLEMENT
-		for(int i = front + 1; i ! = (rear+1) % capacity; i = (i+1) % capacity)
+		for(int i = front + 1; i !=(rear + 1)%capacity; i = (i+1)%capacity){
+			if(i == 7)
+				i = 0;			
 			a += queue[i];
+			a += " ";
+		}
+		a += "\n";
 		a += "rear=";
-		a += String.valueOf(rear);
+		a += Integer.toString(rear);
+		a += ", ";
 		a += "front=";
-		a += String.valueOf(front);
+		a += Integer.toString(front);
 		return a;
 	}
 }; 

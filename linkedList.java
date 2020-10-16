@@ -51,22 +51,17 @@ class SortedList <T extends Comparable<T> > {
 	// We first need to find the position to insert
 
 	//	cerr << "NEED TO IMPLEMENT" << endl;
-		SortedListNode<T> temp;
 		SortedListNode<T> x = GetNode();
-		boolean isTrue = true;
+		int test = 0;
 		x.data = e;
-		temp = first.link;
-		while(true) {
-			if(e.compareTo(temp.link.data) == 1) { // 주소체크
-				temp.link = x;
-				x.link = temp.link.link;
-				break;
-			}
-			else {
-				temp = temp.link;
-			}
-		}
 		
+		if(first != first.link) {
+			test++;
+		}
+		else {
+			x = first.link;
+			x.link = first;
+		}
 	}
 
 

@@ -46,7 +46,7 @@ class SortedList <T extends Comparable<T> > {
 	// We first need to find the position to insert
 
 	//	cerr << "NEED TO IMPLEMENT" << endl;
-		SortedListNode<T> tempNode;
+		SortedListNode<T> temp;
 		SortedListNode<T> x = GetNode();
 		boolean isTrue = true;
 		x.data = e;

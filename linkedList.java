@@ -29,18 +29,14 @@ class SortedList <T extends Comparable<T> > {
 	void Clear() {	// Delete the circular list
 	//	cerr << "NEED TO IMPLEMENT" << endl;
 		SortedListNode<T> x = first.link;
-		SortedListNode<T> p = x;
-		while(p.link != first){
-			p = p.link;
-		}
-		p.link = av;
+		first.link = av;
 		av = x;
 	}
 
 	SortedListNode<T> GetNode() {	// Provide a node for use
 	//	cerr << "NEED TO IMPLEMENT" << endl;
 		SortedListNode<T> x = null;
-		if(av == null || first == null){
+		if(av == null){
 			x = new SortedListNode<T>();
 		}
 		else{

@@ -40,7 +40,7 @@ class SortedList <T extends Comparable<T> > {
 			x = new SortedListNode<T>();
 		}
 		else{
-			x.link = av;
+			x = av;
 			av = av.link;
 		}
 		return x;
@@ -76,7 +76,7 @@ class SortedList <T extends Comparable<T> > {
 
 		str += "List : ";
 		// traverse all the nodes
-		while (p != first) {
+		while (p != first && p != null) {
 			str += p.data + "  ";
 			p = p.link;
 		}

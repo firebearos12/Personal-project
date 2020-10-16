@@ -37,8 +37,12 @@ class SortedList <T extends Comparable<T> > {
 	SortedListNode<T> GetNode() {	// Provide a node for use
 	//	cerr << "NEED TO IMPLEMENT" << endl;
 		SortedListNode<T> x = null;
-		x.link = av;
-		av = av.link;
+		if(av == null)
+			x = new SortedListNode<T>();
+		else{
+			x.link = av;
+			av = av.link;
+		}
 		return x;
 	}
 
@@ -51,8 +55,8 @@ class SortedList <T extends Comparable<T> > {
 		boolean isTrue = true;
 		x.data = e;
 		temp = first.link;
-		while(temp.data != 0) {
-			if(e >= temp.link.data) { // 주소체크
+		while(true) {
+			if(e.compareTo(temp.link.data) == 1) { // 주소체크
 				temp.link = x;
 				x.link = temp.link.link;
 				break;

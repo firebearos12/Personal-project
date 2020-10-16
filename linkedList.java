@@ -37,8 +37,9 @@ class SortedList <T extends Comparable<T> > {
 	SortedListNode<T> GetNode() {	// Provide a node for use
 	//	cerr << "NEED TO IMPLEMENT" << endl;
 		SortedListNode<T> x = null;
-		if(av == null)
+		if(av == null){
 			x = new SortedListNode<T>();
+		}
 		else{
 			x.link = av;
 			av = av.link;

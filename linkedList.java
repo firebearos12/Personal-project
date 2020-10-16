@@ -29,7 +29,7 @@ class SortedList <T extends Comparable<T> > {
 	void Clear() {	// Delete the circular list
 	//	cerr << "NEED TO IMPLEMENT" << endl;
 		SortedListNode<T> x = first.link;
-		first.link = av
+		first.link = av;
 		av = x;
 		
 	}
@@ -38,7 +38,7 @@ class SortedList <T extends Comparable<T> > {
 	//	cerr << "NEED TO IMPLEMENT" << endl;
 		SortedListNode<T> x = null;
 		x.link = av;
-		av = av.link
+		av = av.link;
 		return x;
 	}
 
@@ -50,10 +50,10 @@ class SortedList <T extends Comparable<T> > {
 		SortedListNode<T> x = GetNode();
 		boolean isTrue = true;
 		x.data = e;
-		temp = first.link
+		temp = first.link;
 		while(temp.data != 0) {
 			if(e >= temp.link.data) { // 주소체크
-				temp.link = x
+				temp.link = x;
 				x.link = temp.link.link;
 				break;
 			}

@@ -52,14 +52,17 @@ class SortedList <T extends Comparable<T> > {
 
 	//	cerr << "NEED TO IMPLEMENT" << endl;
 		SortedListNode<T> x = GetNode();
-		SortedListNode<T> p = first;
+		SortedListNode<T> pre = first;
+		SortedListNode<T> p = first.link;
 		x.data = e;
 		while(true){
-			if(e.compareTo(p.data) == 1){
-				p.link = x;
+			if(e.compareTo(p.data) >= 0){
+				x.link = p;				
+				pre.link = x;
 				break;
 			}
 			else{
+				pre = p;
 				p = p.link;
 			}
 		}

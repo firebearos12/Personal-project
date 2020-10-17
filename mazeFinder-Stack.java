@@ -22,6 +22,8 @@ class Maze {
 		mark = new int[m + 2][p + 2];
 		routeX.push(1);
 		routeY.push(1);
+		preX.push(0);
+		preY.push(0);
 		for(int i = 0; i < m + 2; i++) {
 			for(int j = 0; j < p + 2; j++) {
 				maze[i][j] = 1;
@@ -50,7 +52,7 @@ class Maze {
 		Stack<Integer> prY = preY;
 		while(direction < 8) {
 			switch(direction) {
-			case 12: // 0,-1
+			case 4: // 0,-1
 				if(maze[rY.peek() - 1][rX.peek()] == 1) {// 벽에 가로 막힘
 					azimuth[4] = -1;
 					direction++;
@@ -63,7 +65,7 @@ class Maze {
 					move(0, -1);
 				break;
 				
-			case 2: // 1, -1
+			case 5: // 1, -1
 				if(maze[rY.peek() - 1][rX.peek() + 1] == 1) {// 벽에 가로 막힘
 					azimuth[5] = -1;
 					direction++;
@@ -77,7 +79,7 @@ class Maze {
 				break;
 				
 				
-			case 3: //1,0
+			case 6: //1,0
 				if(maze[rY.peek()][rX.peek() + 1] == 1) {// 벽에 가로 막힘
 					azimuth[6] = -1;
 					direction++;
@@ -91,7 +93,7 @@ class Maze {
 				break;
 				
 				
-			case 4: // 1,1
+			case 7: // 1,1
 				if(maze[rY.peek() + 1][rX.peek() + 1] == 1) {// 벽에 가로 막힘
 					azimuth[7] = -1;
 					direction++;
@@ -105,7 +107,7 @@ class Maze {
 				break;
 				
 				
-			case 6: //0,1
+			case 0: //0,1
 				if(maze[rY.peek() + 1][rX.peek()] == 1) {// 벽에 가로 막힘
 					azimuth[0] = -1;
 					direction++;
@@ -119,7 +121,7 @@ class Maze {
 				break;
 				
 				
-			case 8: //-1,1
+			case 1: //-1,1
 				if(maze[rY.peek() + 1][rX.peek() - 1] == 1) {// 벽에 가로 막힘
 					azimuth[1] = -1;
 					direction++;
@@ -133,7 +135,7 @@ class Maze {
 				break;
 				
 				
-			case 9: //-1,0
+			case 2: //-1,0
 				if(maze[rY.peek()][rX.peek() - 1] == 1) {// 벽에 가로 막힘
 					azimuth[2] = -1;
 					direction++;
@@ -147,7 +149,7 @@ class Maze {
 				break;
 				
 				
-			case 10://-1,-1
+			case 3://-1,-1
 				if(maze[rY.peek() - 1][rX.peek() - 1] == 1) {// 벽에 가로 막힘
 					azimuth[3] = -1;
 					direction++;
@@ -202,4 +204,3 @@ class Maze {
 	}
 
 };
-

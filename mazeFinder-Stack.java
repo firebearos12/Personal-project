@@ -39,6 +39,7 @@ class Maze {
 		int[] azimuth = {0,0,0,0,0,0,0,0};
 		int cnt = 0;
 		int cntPop = 0;
+		int direction = 0;
 		//초기화
 		for(int i = 0; i < 8 ; i ++) {
 			azimuth[i] = 0;
@@ -47,84 +48,118 @@ class Maze {
 		Stack<Integer> rY = routeY;
 		Stack<Integer> prX = preX;
 		Stack<Integer> prY = preY;
-		switch(direction) {
+		while(direction < 8) {
+			switch(direction) {
 			case 12: // 0,-1
-				if(maze[rY.peek() - 1][rX.peek()] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek() - 1][rX.peek()] == 1) {// 벽에 가로 막힘
 					azimuth[4] = -1;
-				else if((rY.peek() - 1) == prY.peek() && (rX.peek() == prX.peek())) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek() - 1) == prY.peek() && (rX.peek() == prX.peek())) { // 왔던 위치하고 겹침
 					azimuth[4] = -2;
+					direction++;
+				}
 				else
 					move(0, -1);
 				break;
 				
 			case 2: // 1, -1
-				if(maze[rY.peek() - 1][rX.peek() + 1] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek() - 1][rX.peek() + 1] == 1) {// 벽에 가로 막힘
 					azimuth[5] = -1;
-				else if((rY.peek() - 1) == prY.peek() && (rX.peek() + 1) == prX.peek()) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek() - 1) == prY.peek() && (rX.peek() + 1) == prX.peek()) { // 왔던 위치하고 겹침
 					azimuth[5] = -2;
+					direction++;
+				}
 				else
 					move(1, -1);
 				break;
 				
 				
 			case 3: //1,0
-				if(maze[rY.peek()][rX.peek() + 1] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek()][rX.peek() + 1] == 1) {// 벽에 가로 막힘
 					azimuth[6] = -1;
-				else if((rY.peek()) == prY.peek() && (rX.peek() + 1) == prX.peek()) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek()) == prY.peek() && (rX.peek() + 1) == prX.peek()) { // 왔던 위치하고 겹침
 					azimuth[6] = -2;
+					direction++;
+				}
 				else
 					move(1, 0);
 				break;
 				
 				
 			case 4: // 1,1
-				if(maze[rY.peek() + 1][rX.peek() + 1] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek() + 1][rX.peek() + 1] == 1) {// 벽에 가로 막힘
 					azimuth[7] = -1;
-				else if((rY.peek() + 1) == prY.peek() && (rX.peek() + 1) == prX.peek()) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek() + 1) == prY.peek() && (rX.peek() + 1) == prX.peek()) { // 왔던 위치하고 겹침
 					azimuth[7] = -2;
+					direction++;
+				}
 				else
 					move(1, 1);
 				break;
 				
 				
 			case 6: //0,1
-				if(maze[rY.peek() + 1][rX.peek()] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek() + 1][rX.peek()] == 1) {// 벽에 가로 막힘
 					azimuth[0] = -1;
-				else if((rY.peek() + 1) == prY.peek() && (rX.peek()) == prX.peek()) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek() + 1) == prY.peek() && (rX.peek()) == prX.peek()) { // 왔던 위치하고 겹침
 					azimuth[0] = -2;
+					direction++;
+				}
 				else
 					move(0, 1);
 				break;
 				
 				
 			case 8: //-1,1
-				if(maze[rY.peek() + 1][rX.peek() - 1] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek() + 1][rX.peek() - 1] == 1) {// 벽에 가로 막힘
 					azimuth[1] = -1;
-				else if((rY.peek() + 1) == prY.peek() && (rX.peek() - 1) == prX.peek()) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek() + 1) == prY.peek() && (rX.peek() - 1) == prX.peek()) { // 왔던 위치하고 겹침
 					azimuth[1] = -2;
+					direction++;
+				}
 				else
 					move(-1, 1);
 				break;
 				
 				
 			case 9: //-1,0
-				if(maze[rY.peek()][rX.peek() - 1] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek()][rX.peek() - 1] == 1) {// 벽에 가로 막힘
 					azimuth[2] = -1;
-				else if((rY.peek()) == prY.peek() && (rX.peek() - 1) == prX.peek()) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek()) == prY.peek() && (rX.peek() - 1) == prX.peek()) { // 왔던 위치하고 겹침
 					azimuth[2] = -2;
+					direction++;
+				}
 				else
 					move(-1, 0);
 				break;
 				
 				
 			case 10://-1,-1
-				if(maze[rY.peek() - 1][rX.peek() - 1] == 1)// 벽에 가로 막힘
+				if(maze[rY.peek() - 1][rX.peek() - 1] == 1) {// 벽에 가로 막힘
 					azimuth[3] = -1;
-				else if((rY.peek() - 1) == prY.peek() && (rX.peek() - 1) == prX.peek()) // 왔던 위치하고 겹침
+					direction++;
+				}
+				else if((rY.peek() - 1) == prY.peek() && (rX.peek() - 1) == prX.peek()) { // 왔던 위치하고 겹침
 					azimuth[3] = -2;
+					direction++;
+				}
 				else
 					move(-1, -1);
 				break;				
+			}
 		}
 		
 		for(int i = 0 ; i < 8; i ++) {
@@ -156,8 +191,8 @@ class Maze {
 	}
 	
 	public void endPro() {
-		System.out.println("No path in the maze.");
 		continueWhile = false;
+		System.out.println("No path in the maze.");
 	}
 	
 	public void Path(int m, int p) {
@@ -167,3 +202,4 @@ class Maze {
 	}
 
 };
+

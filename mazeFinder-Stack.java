@@ -28,24 +28,27 @@ class Maze {
 	}
 	
 	public void Path(int m, int p) {
-		Stack<Integer> routeX = new Stack();
-		Stack<Integer> routeY = new Stack();
-		Stack<Integer> preX = new Stack();
-		Stack<Integer> preY = new Stack();
+		Stack<Integer> routeX = new Stack<>();
+		Stack<Integer> routeY = new Stack<>();
+		Stack<Integer> preX = new Stack<>();
+		Stack<Integer> preY = new Stack<>();
 		int presentDirection = 0;
 		boolean isMove = false;
 		routeX.push(1);
 		routeY.push(1);
-		int[] azimuth = new int(8);
-		azimuth = {6,8,9,10,12,2,3,4};
+		int[] azimuth = {6,8,9,10,12,2,3,4};
 		//현재 위치는 1,1
 		//이동
-		while(true) {
+		while(!(routeX.peek() == m + 1 && routeY.peek() == p + 1)) {
 			while(presentDirection < 8) {
+
+				System.out.println(routeX.peek());
+				System.out.println(routeY.peek());
+
 				presentDirection = 0;
 				switch(azimuth[presentDirection]) {
 					case 6: // S [0,1]
-						if(maze[routeY + 1][routeX] != 1 && (routeY.peek() + 1 != preY.peek())) {
+						if(maze[routeY.peek() + 1][routeX.peek()] != 1 && (routeY.peek() + 1 != preY.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek());
@@ -56,7 +59,7 @@ class Maze {
 							presentDirection++;
 						break;
 					case 8: //SW [-1,1]
-						if(maze[routeY + 1][routeX - 1] != 1 && (routeY.peek() + 1 != preY.peek()) && (routeX.peek() - 1 != preX.peek())) {
+						if(maze[routeY.peek() + 1][routeX.peek() - 1] != 1 && (routeY.peek() + 1 != preY.peek()) && (routeX.peek() - 1 != preX.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek() - 1);
@@ -67,7 +70,7 @@ class Maze {
 							presentDirection++;
 						break;
 					case 9: // W [-1,0] x,y
-						if(maze[routeY][route - 1] != 1 && (routeX.peek() - 1 != preX.peek())) {
+						if(maze[routeY.peek()][routeX.peek() - 1] != 1 && (routeX.peek() - 1 != preX.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek() - 1);
@@ -78,7 +81,7 @@ class Maze {
 							presentDirection++;
 						break;
 					case 10: // NW [-1,-1]
-						if(maze[routeY - 1][routeX - 1] != 1 && (routeY.peek() - 1 != preY.peek()) && (routeX.peek() - 1 != preX.peek())) {
+						if(maze[routeY.peek() - 1][routeX.peek() - 1] != 1 && (routeY.peek() - 1 != preY.peek()) && (routeX.peek() - 1 != preX.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek() - 1);
@@ -89,7 +92,7 @@ class Maze {
 							presentDirection++;
 						break;
 					case 12: // N [0,-1]
-						if(maze[routeY - 1][routeX] != 1 && (routeY.peek() - 1 != preY.peek())) {
+						if(maze[routeY.peek() - 1][routeX.peek()] != 1 && (routeY.peek() - 1 != preY.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek());
@@ -100,7 +103,7 @@ class Maze {
 							presentDirection++;
 						break;
 					case 2: // NE [1,-1]
-						if(maze[routeY - 1][routeX + 1] != 1 && (routeY.peek() - 1 != preY.peek()) && (routeX.peek() + 1 != preX.peek())) {
+						if(maze[routeY.peek() - 1][routeX.peek() + 1] != 1 && (routeY.peek() - 1 != preY.peek()) && (routeX.peek() + 1 != preX.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek() + 1);
@@ -111,7 +114,7 @@ class Maze {
 							presentDirection++;
 						break;
 					case 3: //E [1,0]
-						if(maze[routeY][routeX + 1] != 1 && (routeX.peek() + 1 != preX.peek())) {
+						if(maze[routeY.peek()][routeX.peek() + 1] != 1 && (routeX.peek() + 1 != preX.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek() + 1);
@@ -122,7 +125,7 @@ class Maze {
 							presentDirection++;
 						break;
 					case 4: // SE [1,1]
-						if(maze[routeY + 1][routeX + 1] != 1 && (routeY.peek() + 1 != preY.peek()) && (routeX.peek() + 1 != preX.peek())) {
+						if(maze[routeY.peek() + 1][routeX.peek() + 1] != 1 && (routeY.peek() + 1 != preY.peek()) && (routeX.peek() + 1 != preX.peek())) {
 							preX.push(routeX.peek());
 							preY.push(routeY.peek());
 							routeX.push(routeX.peek() + 1);
@@ -141,7 +144,6 @@ class Maze {
 				maze[routeY.pop()][routeX.pop()] = 1;				
 			}
 		}
-		System.out.println("No path in the maze.");
 		
 		
 	}

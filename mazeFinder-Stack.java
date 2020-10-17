@@ -30,7 +30,8 @@ class Maze {
 	}
 	
 	public void move(int moveX, int moveY) {
-		
+		rX.push(rX.peek() + moveX);
+		rY.push(rY.peek() + moveY);
 	}
 	
 	public boolean canMoveQ(int moveX, int moveY) {

@@ -34,7 +34,6 @@ class Maze {
 	}
 	
 	public boolean canMoveQ(int moveX, int moveY) {
-		int direction = 0;
 		int nextX = rX.peek() + moveX;
 		int nextY = rY.peek() + moveY;
 		if(maze[nextY][nextX] == 1)//벽으로 막힌 길
@@ -52,7 +51,6 @@ class Maze {
 		//else
 		//move() direction = 0; -> move() : memX.push(rX)  rX = nextX rY = nextY
 	public void Path(int m, int p) {
-		int direction;
 		rX.push(1);
 		rY.push(1);
 		boolean continueWhile = true;

@@ -14,6 +14,8 @@ class Maze {
 	Stack<Integer> preY = new Stack<>();
 	boolean continueWhile = true;
 	int cnt = 0;
+	int sizeX;
+	int sizeY;
 	int cntPop = 0;
 	int direction = 0;
 
@@ -27,6 +29,8 @@ class Maze {
 		routeY.push(1);
 		preX.push(1);
 		preY.push(1);
+		sizeX = m;
+		sizeY = p;
 		for(int i = 0; i < m + 2; i++) {
 			for(int j = 0; j < p + 2; j++) {
 				maze[i][j] = 1;
@@ -163,6 +167,8 @@ class Maze {
 				break;				
 			}
 		System.out.println("cnt : " + Integer.toString(cnt)+"cnt : " + Integer.toString(cntPop) + "  dircetion : " + Integer.toString(direction));		}
+		if(continueWhile == false)
+			return;		
 		if(cnt == 8) // 아예 다 막힘
 			endPro(m1,p2);
 		
@@ -175,9 +181,17 @@ class Maze {
 		cnt = 0;
 		cntPop = 0;
 		direction = 0;
-		maze[routeX.pop()][routeY.pop()] = 1;
+		maze[routeY.peek()][routeX.peek()] = 1;
+		routeX.pop();
+		routeY.pop();
 		preX.pop();
 		preY.pop();
+		for(int i = 0 ; i < 5; i ++){
+			for(int j = 0; j < 5; j ++){
+				System.out.print(maze[i][j]);		
+			}
+			System.out.println("");
+		}
 	}
 	
 	public void move(int moveToThisX, int moveToThisY) {
@@ -188,9 +202,10 @@ class Maze {
 		preY.push(routeY.peek());
 		routeX.push(routeX.peek() + moveToThisX);
 		routeY.push(routeY.peek() + moveToThisY);
-	System.out.println("현재 위치" + Integer.toString(routeX.peek()) + ',' + Integer.toString(routeY.peek()) + "     전 위치" + Integer.toString(preX.peek()) + ',' + Integer.toString(preY.peek()));
+		System.out.println("현재 위치" + Integer.toString(routeX.peek()) + ',' + Integer.toString(routeY.peek()) + "     전 위치" + Integer.toString(preX.peek()) + ',' + Integer.toString(preY.peek()));
+		if(routeX.peek() == sizeX && routeY.peek() == sizeY)
+			continueWhile = false;
 	}
-	
 	public void endPro(int m , int p) {
 		continueWhile = false;
 		try{
@@ -205,9 +220,6 @@ class Maze {
 	
 	public void Path(int m, int p) {
 		while(continueWhile) {
-			direction = 0;
-			cnt = 0;
-			cntPop = 0;
 			canMoveQnA(m,p);
 		}
 	}

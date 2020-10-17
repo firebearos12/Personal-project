@@ -13,6 +13,9 @@ class Maze {
 	Stack<Integer> preX = new Stack<>();
 	Stack<Integer> preY = new Stack<>();
 	boolean continueWhile = true;
+	int cnt = 0;
+	int cntPop = 0;
+	int direction = 0;
 
 	private int[][] maze;	// 2 dim array for maze
 	private int[][] mark;	// 2 dim array for visit marking
@@ -38,9 +41,6 @@ class Maze {
 	}
 	
 	public void canMoveQnA(int m, int p) {
-		int cnt = 0;
-		int cntPop = 0;
-		int direction;
 		int m1 = m;
 		int p2 = p;
 		
@@ -162,15 +162,12 @@ class Maze {
 					move(-1, -1);
 				break;				
 			}
-System.out.println("cnt : " + Integer.toString(cnt)+"cnt : " + Integer.toString(cntPop));		}
+		System.out.println("cnt : " + Integer.toString(cnt)+"cnt : " + Integer.toString(cntPop) + "  dircetion : " + Integer.toString(direction));		}
 		if(cnt == 8) // 아예 다 막힘
 			endPro(m1,p2);
 		
 		else if(cnt == 7 && cntPop == 1)// 진행은 못하지만 pop으로 전 상태로 돌아갈 수 있음
 			moveBackWard();
-		cnt = 0;
-		cntPop = 0;
-		direction = 0;
 	}
 	
 	public void moveBackWard() {
@@ -203,6 +200,9 @@ System.out.println("cnt : " + Integer.toString(cnt)+"cnt : " + Integer.toString(
 	
 	public void Path(int m, int p) {
 		while(continueWhile) {
+			direction = 0;
+			cnt = 0;
+			cntPop = 0;
 			canMoveQnA(m,p);
 		}
 	}

@@ -35,10 +35,10 @@ class Maze {
 		maze[i][j] = val;
 	}
 	
-	public void canMoveQnA(int direction) {
+	public void canMoveQnA() {
 		int[] azimuth = {0,0,0,0,0,0,0,0};
 		int cnt = 0;
-		boolean canMoveQnA = false
+		int cntPop = 0;
 		//초기화
 		for(int i = 0; i < 8 ; i ++) {
 			azimuth[i] = 0;
@@ -166,6 +166,4 @@ class Maze {
 		}
 	}
 
-}; 
-
-
+};

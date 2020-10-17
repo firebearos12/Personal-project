@@ -172,13 +172,18 @@ class Maze {
 	
 	public void moveBackWard() {
 	System.out.println("뒤로 감" + Integer.toString(routeX.peek()) + ',' + Integer.toString(routeY.peek()) + "이쪽으로 감 " + Integer.toString(preX.peek()) + ',' + Integer.toString(preY.peek()));
+		cnt = 0;
+		cntPop = 0;
+		direction = 0;
 		maze[routeX.pop()][routeY.pop()] = 1;
 		preX.pop();
 		preY.pop();
 	}
 	
 	public void move(int moveToThisX, int moveToThisY) {
-		
+		cnt = 0;
+		cntPop = 0;
+		direction = 0;
 		preX.push(routeX.peek());
 		preY.push(routeY.peek());
 		routeX.push(routeX.peek() + moveToThisX);

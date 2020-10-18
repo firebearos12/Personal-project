@@ -1,6 +1,7 @@
 import java.util.*;
 
 // offset
+// 야이 멍청아... 스택 읽고 지우고 ㅈㄹ하지말고 mark에 저장하자.. << 아직 수정 
 
 /**
  * Maze Class

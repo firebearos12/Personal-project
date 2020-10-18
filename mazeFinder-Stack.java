@@ -30,6 +30,7 @@ class Maze {
 	}
 	
 	public void move(int moveX, int moveY) {
+		System.out.println("상태 : 이동 완료    " + Integer.toString(rX.peek()) + ',' + Integer.toString(rY.peek()) +")  ---->  ("+Integer.toString(rX.peek()+moveX)+','+ Integer.toString(rY.peek()+moveY)+')');
 		rX.push(rX.peek() + moveX);
 		rY.push(rY.peek() + moveY);
 	}
@@ -37,6 +38,9 @@ class Maze {
 	public boolean canMoveQ(int moveX, int moveY) {
 		int[] rXHistory = new int[rX.size()];
 		int[] rYHistory = new int[rY.size()];
+		int nextX = rX.peek() + moveX;
+		int nextY = rY.peek() + moveY;
+		System.out.println("상태 : 탐색중    대상 : (" + Integer.toString(nextX) +',' + Integer.toString(nextY) +')');
 		for(int i = rXHistory.length - 1; i >= 0 ; i --) {
 			rXHistory[i] = rX.pop();
 			rYHistory[i] = rY.pop();
@@ -45,8 +49,6 @@ class Maze {
 			rX.push(rXHistory[i]);
 			rY.push(rYHistory[i]);
 		}//스택 다시 복구
-		int nextX = rX.peek() + moveX;
-		int nextY = rY.peek() + moveY;
 		if(maze[nextY][nextX] == 1)//벽으로 막힌 길
 			return false;
 		else {

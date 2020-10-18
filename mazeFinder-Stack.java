@@ -35,14 +35,27 @@ class Maze {
 	}
 	
 	public boolean canMoveQ(int moveX, int moveY) {
+		int[] rXHistory = new int[rX.size()];
+		int[] rYHistory = new int[rY.size()];
+		for(int i = rXHistory.length - 1; i >= 0 ; i --) {
+			rXHistory[i] = rX.pop();
+			rYHistory[i] = rY.pop();
+		}//스택 -> 배열
+		for(int i = 0; i < rXHistory.length ; i ++) {
+			rX.push(rXHistory[i]);
+			rY.push(rYHistory[i]);
+		}//스택 다시 복구
 		int nextX = rX.peek() + moveX;
 		int nextY = rY.peek() + moveY;
 		if(maze[nextY][nextX] == 1)//벽으로 막힌 길
 			return false;
-		else if((rX.search(nextX) != -1 && rY.search(nextY) != -1) && (rX.search(nextX) == rY.search(nextY))) // 가본적이 있는 길
-			return false;
-		else//가본적이 없는 길
-			return true;
+		else {
+			for(int i = 0; i < rXHistory.length; i ++) {
+				if(rXHistory[i] == nextX && rXHistory[i] == nextY)
+					return false;
+			}
+		}
+		return true;
 	}
 		//갈 곳이 한곳 밖에 없으면 pop을 하고 길을 막는다.
 		//if direction == 7 -> maze[rY][rX] = 1 pop() direction = 0;
@@ -139,4 +152,3 @@ class Maze {
 	}
 
 }; 
-

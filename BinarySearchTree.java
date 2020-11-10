@@ -31,6 +31,7 @@ public class BST {
 	void addNodeT(int input){
 		if(dummyroot.right == null) {
 			dummyroot.right = new Node(input);
+			dummyroot.key = input - 200;
 			dummyroot.right.parent = dummyroot;
 		}
 		else {

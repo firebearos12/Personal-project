@@ -116,6 +116,9 @@ class BST <T extends KeyValue> {
 			return false;	// non existing key
 		TreeNode<T> searchNode = root;
 		TreeNode<T> parentNode = root;
+		if(Get(item) == null) {
+			return false;
+		}
 		int targetKey = Get(item).GetKey();
 		boolean doWhileQ = true;
 		
@@ -136,13 +139,12 @@ class BST <T extends KeyValue> {
 				searchNode = searchNode.rightChild;
 			}
 		}
-		//degree == 0 && delete rootNode
-		if(parentNode == searchNode) {
-			root = null;
-		}
 		//degree == 0 (not rootNode)
-		else if(searchNode.rightChild == null && searchNode.leftChild == null) {
-			if(parentNode.data.GetKey() < targetKey) {
+		if(searchNode.rightChild == null && searchNode.leftChild == null) {
+			if(parentNode == searchNode) {
+				root = null;
+			}
+			else if(parentNode.data.GetKey() < targetKey) {
 				parentNode.rightChild = null;
 			}
 			else {
@@ -153,7 +155,11 @@ class BST <T extends KeyValue> {
 		
 		//degree == 1
 		else if(searchNode.rightChild == null) {
-			if(parentNode.data.GetKey() < targetKey) {
+			if(parentNode == searchNode) {
+				root = root.leftChild;
+				root.leftChild = null;
+			}
+			else if(parentNode.data.GetKey() < targetKey) {
 				parentNode.rightChild = searchNode.leftChild;
 			}
 			else {
@@ -162,7 +168,11 @@ class BST <T extends KeyValue> {
 		}
 		
 		else if(searchNode.leftChild == null) {
-			if(parentNode.data.GetKey() < targetKey) {
+			if(parentNode == searchNode) {
+				root = root.rightChild;
+				root.rightChild = null;
+			}
+			else if(parentNode.data.GetKey() < targetKey) {
 				parentNode.rightChild = searchNode.rightChild;
 			}
 			else {
@@ -175,7 +185,7 @@ class BST <T extends KeyValue> {
 		else {
 			boolean doWhileQ2 = true;
 			TreeNode<T> subTreeMax = searchNode.leftChild;
-			TreeNode<T> subTreeMaxParent = searchNode.leftChild;
+			TreeNode<T> subTreeMaxParent = searchNode;
 			Item temp = new Item(subTreeMax.data.GetKey());
 			while(doWhileQ2) {
 				if(subTreeMax.rightChild == null) {
@@ -186,20 +196,45 @@ class BST <T extends KeyValue> {
 					subTreeMax = subTreeMax.rightChild;
 				}
 			}
-			
-			if(parentNode.data.GetKey() < targetKey) {
-				parentNode.rightChild = subTreeMax;
+			if(searchNode == root) { // 지우는게 루트노드
+				if(searchNode == subTreeMaxParent) {
+					subTreeMax.rightChild = root.rightChild;
+					root = subTreeMax;
+				}
+				else {
+					if(subTreeMax.leftChild == null)
+						subTreeMaxParent.rightChild = null;
+					else
+						subTreeMaxParent.rightChild = subTreeMax.leftChild;
+					
+					subTreeMax.rightChild = root.rightChild;
+					subTreeMax.leftChild = root.leftChild;
+					root = subTreeMax;
+				}
 			}
+			
+			else if(searchNode == subTreeMaxParent) {
+				subTreeMax.rightChild = searchNode.rightChild;
+				if(parentNode.data.GetKey() < subTreeMax.data.GetKey())
+					parentNode.rightChild = subTreeMax;
+				else
+					parentNode.leftChild = subTreeMax;
+			}
+			
 			else {
-				parentNode.leftChild = subTreeMax;
+				if(subTreeMax.leftChild == null)
+					subTreeMaxParent.rightChild = null;
+				else
+					subTreeMaxParent.rightChild = subTreeMax.leftChild;
+				
+				subTreeMax.rightChild = searchNode.rightChild;
+				subTreeMax.leftChild = searchNode.leftChild;
+				
+				if(parentNode.data.GetKey() < subTreeMax.data.GetKey())
+					parentNode.rightChild = subTreeMax;
+				else
+					parentNode.leftChild = subTreeMax;
 			}
-			if(subTreeMax.leftChild == null)
-				subTreeMaxParent.rightChild = null;
-			else
-				subTreeMaxParent.rightChild = subTreeMax.leftChild;
-			subTreeMax.leftChild = searchNode.leftChild;
-			subTreeMax.rightChild = searchNode.rightChild;
-			
 		}
 		
 		

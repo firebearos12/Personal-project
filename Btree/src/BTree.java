@@ -1,8 +1,3 @@
-/*
- * File Processing, 2020
- * BTree.java
- * implementation of B-tree
- */
 import java.util.Stack;
 
 public class BTree {
@@ -13,22 +8,13 @@ public class BTree {
     int K[];
     BTNode P[];
     
-    /**
-     * constructor
-     * @param m: number of branch points in B-Tree
-     */
+
     BTNode(int m) {
       this.n = 0;
       this.K = new int[m-1];
       this.P = new BTNode[m];
     }
-    
-    /**
-     * insert inserts newKey.
-     * @param m: number of branch points in B-Tree
-     * @param newKey: a key to insert
-     * @return root node of B-Tree
-     */
+
     BTNode insert(int m, int newKey) {
     	if(root.K[0] == 0) {
     		root = new BTNode(m);
@@ -152,15 +138,8 @@ public class BTree {
     		return newRoot;
     	}
     }
-    
-    /**
-     * delete deletes oldKey.
-     * @param m: number of branch points in B-Tree
-     * @param oldKey: a key to delete
-     * @return root node of B-Tree
-     */
+
     BTNode delete(int m, int oldKey) {
-      /* write your code here */
     	BTNode searchNode = root;
     	Stack<BTNode> stack  = new Stack<>();
     	int cnt;
@@ -446,48 +425,25 @@ public class BTree {
     	
     	return root;
     }
-    
-    /**
-     * inorder implements inorder traversal.
-     */
      void inorder() {
-       /* write your code here */
      }
-  } // end class BTNode
-  
-  /**
-   * constructor
-   * @param m: number of branch points in B-tree
-   */
+  }
+
   BTree(int m) {
     this.root = new BTNode(m);
   }
   
-  /**
-   * insert inserts newKey.
-   * @param m: number of branch points in B-tree
-   * @param newKey: a key to insert
-   */
   void insert(int m, int newKey) {
-    /* write your code here */
 	   root = root.insert(m, newKey);
   }
   
-  /**
-   * delete deletes oldKey.
-   * @param m: number of branch points in B-tree
-   * @param oldKey: a key to delete
-   */
+
   void delete(int m, int oldKey) {
-    /* write your code here */
 	  root = root.delete(m, oldKey);
   }
   
-  /**
-   * inorder implements inorder traversal.
-   */
+
   void inorder() {
-    /* write your code here */
 	  inorderT(root);
   }
   void inorderT(BTNode node) {
@@ -502,7 +458,6 @@ public class BTree {
   }
   
   public static void main(String []args){
-    /* do not modify the code below */
     
     int insertTestCases[] = { 40, 11, 77, 33, 20, 90, 99, 70, 88, 80,
                               66, 10, 22, 30, 44, 55, 50, 60, 100, 28,
@@ -544,6 +499,6 @@ public class BTree {
       T.inorder();
       System.out.println();
     }
-  } // end main
+  }
   
-} // end class BTree
+}
